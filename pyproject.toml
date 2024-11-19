@@ -1,0 +1,39 @@
+[project]
+name = "fisica"
+version = "0.0.1"
+authors = [
+  { name="Francesco Piana", email="f.piana.pr@gmail.com" },
+]
+description = "A small example package"
+
+readme = {file = "README.md", content-type = "text/markdown"}
+
+requires-python = ">=3.13"
+
+license = {text = "MIT License"}
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Development Status :: 1 - Planning",
+    "Environment :: Console :: Framebuffer",
+    "Framework :: Buildout :: Extension",
+    "Intended Audience :: Education",
+    "Natural Language :: Italian",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
+    "Environment :: Hardware :: ARM",
+    "Environment :: Hardware :: ARM :: 64-Bit"
+]
+
+keywords = ["mechanics", "thermodynamics", "electromagnetism", "optics", "acustics"]
+
+maintainers = [
+  {name = "Francesco Piana", email = "f.piana.pr@gmail.com"}
+]
+
+[urls]
+Homepage = "https://github.com/frpiana/fisica"
+Issues = "https://github.com/frpiana/fisica/issues"
+Documentation = "https://github.com/frpiana/fisica/wiki"
