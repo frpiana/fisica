@@ -26,8 +26,9 @@ class Punto:
         Args:
             posizione (list): Una lista di tre valori che rappresentano le coordinate x, y e z del punto.
         """
-        self.posizione = posizione
+        self._posizione = posizione
     
+    @property
     def posizione(self):
         '''Visualizza e restituisce i valori di posizione.
 
@@ -44,9 +45,58 @@ class Punto:
         >>> print(pos)
         >>> [5, 6, 8]
         '''
-        return self.posizione
+        return self._posizione
+    
+    def distanza(self, ente2):
+        '''Distanza in coordinate cartesiane in uno spazio n-dimensionale
 
-class Corpo:
+    Descrizione:
+        La funzione prende le coordinate cartesiane di due punti e restituisce
+        la distanza fra i due punti.
+
+    Parametri:
+        - self: istanza della classe Corpo o Punto
+        - ente2: istanza della classe Corpo o Punto
+    
+    Valore di ritorno:
+        - distanza float valore della distanza fra due corpi o punti
+    
+    Esempio:
+        >>> corpo1:Punto = Punto([1,5,8], 1.59e-8)
+        >>> corpo2:Corpo = Corpo([4,6,8], 1.22e-7)
+        >>> distanza:float = corpo1.distanza(corpo2)
+        >>> Distanza fra due corpi: 3.1622776601683795
+    '''
+        spostamento = [a - b for a, b in zip(self.posizione, ente2.posizione)]
+        quadrato = [a ** 2 for a in spostamento]
+        distanza = sqrt(sum(quadrato))
+        return distanza
+    
+    def versore(self, ente2) -> tuple:
+        '''Versore fra due punti in un spazion n-dimensionale
+
+        Descrizione:
+            Calcolo del versore fra due punti in uno spazio n-dimensionale
+
+        Parametri:
+            - ente1: istanza della classe Corpo o Punto
+            - ente2: istanza della classe Corpo o Punto
+        
+        Valore di ritorno:
+            - versore (tuple) fra due corpi o punti
+        
+        Esempio:
+            >>> corpo1:Corpo = Corpo([1,5,8], 1.59e-8)
+            >>> corpo2:Corpo = Corpo([4,6,8], 1.22e-7)
+            >>> versore:tuple = calcolo_versore(corpo1, corpo2)
+            >>> print(f"Versore: {versore}")
+        '''
+        spostamento = [a - b for a, b in zip(self.posizione, ente2.posizione)]
+        distanza: float = self.distanza(ente2)
+        versore = tuple([a / distanza for a in spostamento])
+        return versore
+
+class Corpo(Punto):
     """Rappresenta un corpo carico nello spazio tridimensionale.
 
     Attributi:
@@ -60,14 +110,14 @@ class Corpo:
         >>> print(corpo.carica)
         1e-6
     """
-    def __init__(self, posizione: list, carica: float):
+    def __init__(self, posizione: list = [0,0,0], massa:float = 0, carica: float = 0):
         """Inizializza un'istanza di Corpo con una posizione specificata e una carica.
 
         Args:
             posizione (list): Una lista di tre valori che rappresentano le coordinate x, y e z del corpo.
             carica (float): Il valore della carica del corpo in Coulomb.
         """
-        self.posizione = posizione
+        super().__init__(posizione)
         self.carica = carica
 
 # ============================================================================================
@@ -123,7 +173,7 @@ def calcolo_versore(ente1: Punto | Corpo, ente2: Punto | Corpo) -> tuple:
     versore = tuple([a / distanza for a in spostamento])
     return versore
 
-def cartesiane_polari(cart:list[float]) -> float:
+def cartesiane_polari(cart:list[float]) -> list[float]:
     '''Converte un insieme di coordinate cartesiane n-dimensionali in coordinate polari.
 
     Questa funzione accetta una lista di coordinate cartesiane e restituisce una lista 
@@ -153,7 +203,7 @@ def cartesiane_polari(cart:list[float]) -> float:
         i += 1
     return pol
 
-def polari_cartesiane(coordinate_polari:list[float]) -> float:
+def polari_cartesiane(coordinate_polari:list[float]) -> list[float]:
     """Converte un insieme di coordinate polari n-dimensionali in coordinate cartesiane.
 
     Questa funzione accetta una lista di coordinate polari che includono il raggio `r` 
