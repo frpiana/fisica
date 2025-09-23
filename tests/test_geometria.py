@@ -1,5 +1,8 @@
 import unittest
-from fisica.geometria import Punto  # Importa la classe Punto dal modulo geometria della libreria fisica
+
+from fisica.geometria import \
+    Punto  # Importa la classe Punto dal modulo geometria della libreria fisica
+
 
 class TestPunto(unittest.TestCase):
     """Test per la classe Punto."""
